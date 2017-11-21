@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+
+</h:head>
+<h:body>
+	<!-- View page that displays the contacts in the database along with the options of adding new contacts, editing and deleting the present contacts and also has the option of searching through the table -->
+	<h:form>
+		<b>Filter:</b>
+		
+		<h:inputText id="searchInput"
+			value="#{contactController.searchString}">
+			<f:ajax render="table" event="keyup" /><!-- automatically renders the table according to the searchString -->
+		</h:inputText>
+		<!-- The contact table, dynamic table that is generated according to the items in the table -->
+		<h:dataTable border="4" cellspacing="2" cellpadding="2"
+			value="#{contactController.getContactList()}" var="contact"
+			id="table" rendered="true"> 
+			<h:column>
+				<f:facet name="header">
+					First Name
+				</f:facet>
+				<h:outputText value="#{contact.firstname}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					Last Name
+				</f:facet>
+				<h:outputText value="#{contact.lastname}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					Phone
+				</f:facet>
+				<h:outputText value="#{contact.phone}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					Email
+				</f:facet>
+				<h:outputText value="#{contact.email}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					Building no.
+				</f:facet>
+				<h:outputText value="#{contact.bno}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					Street
+				</f:facet>
+				<h:outputText value="#{contact.street}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					City
+				</f:facet>
+				<h:outputText value="#{contact.city}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					Company
+				</f:facet>
+				<h:outputText value="#{contact.company}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">	Work Phone
+				</f:facet>
+				<h:outputText value="#{contact.wphone}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Action	</f:facet>
+				<h:commandLink value="Delete"
+					action="#{contactController.delete(contact)}"></h:commandLink> <!--deletes the selected contact -->
+			&nbsp;
+				<h:commandLink value="Edit"
+					action="#{contactController.edit(contact)}"></h:commandLink><!-- navigates to the edit contact page -->
+			</h:column>
+		</h:dataTable>
+	</h:form>
+	<h:outputLink value="contact.xhtml">
+	+New
+	</h:outputLink>
+
+</h:body>
+</html>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<h:head>
+	<title>Contact details</title>
+</h:head>
+<h:body>
+	<!-- Contact Details form -->
+	<h:form>
+
+		CONTACT PROFILE
+		<h:messages style="color:red;"></h:messages>
+		<!-- Displays error Messages in red -->
+
+		<h:panelGrid columns="2" cellspacing="5" cellpadding="10">
+			<h:outputText value="First Name: ">
+			</h:outputText>
+			<h:inputText label="First Name "
+				value="#{contactController.contacts.firstname}" required="true">
+				<!--The value attribute is tied to managed bean 'ContactController'. Stores the value in contacts.firstname -->
+				<f:validateLength minimum="2">
+				</f:validateLength>
+				<!-- Validates length of the firstname input must be atleast 2 characters -->
+			</h:inputText>
+
+			<h:outputText value="Last Name:"></h:outputText>
+			<h:inputText label="Last Name"
+				value="#{contactController.contacts.lastname}">
+				<f:validateLength minimum="2">
+				</f:validateLength>
+			</h:inputText>
+
+			<h:outputText value="Email:">
+			</h:outputText>
+			<h:inputText id="email" label="Email"
+				value="#{contactController.contacts.email}"
+				validatorMessage="#{contactController.contacts.email} is not valid">
+				<f:validateRegex
+					pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+				<!-- To check the email pattern -->
+			</h:inputText>
+
+			<h:outputText value="Phone: ">
+			</h:outputText>
+			<h:inputText label="Phone"
+				value="#{contactController.contacts.phone}" required="true">
+				<f:validateLength minimum="8" maximum="15">
+				</f:validateLength>
+			</h:inputText>
+
+			<h:outputText value="City:">
+			</h:outputText>
+			<h:inputText label="City" value="#{contactController.contacts.city}">
+				<f:validateLength minimum="2" maximum="30">
+				</f:validateLength>
+			</h:inputText>
+
+			<h:outputText value="Building No.:">
+			</h:outputText>
+			<h:inputText label="Building No."
+				value="#{contactController.contacts.bno}">
+				<f:validateLength maximum="5">
+				</f:validateLength>
+			</h:inputText>
+
+			<h:outputText value="Street:">
+			</h:outputText>
+			<h:inputText label="Street"
+				value="#{contactController.contacts.street}">
+			</h:inputText>
+
+			<h:outputText value="Company:">
+			</h:outputText>
+			<h:inputText label="Company"
+				value="#{contactController.contacts.company}">
+			</h:inputText>
+
+			<h:outputText value="Work Phone:">
+			</h:outputText>
+			<h:inputText label="Work Phone"
+				value="#{contactController.contacts.wphone}">
+			</h:inputText>
+
+
+			<h:inputHidden id="id"
+				value="#{contactController.contacts.idcontacts}">
+			</h:inputHidden>
+
+		</h:panelGrid>
+		<h:commandButton action="#{contactController.add}" value="Save">
+			<!-- Submits the from and navigates to the page returned by the method binding expression in action attribute -->
+		</h:commandButton>
+	</h:form>
+</h:body>
+</html>
